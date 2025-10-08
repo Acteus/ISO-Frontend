@@ -4,10 +4,12 @@ A modern, responsive web application for conducting quality education surveys at
 
 ## 🌟 Features
 
+- **User Authentication** - Secure login and registration system using localStorage
 - **Beautiful Landing Page** - Engaging splash screen with smooth transitions
 - **Multi-step Survey Form** - Progressive survey with 8 sections covering all aspects of education quality
 - **Real-time Progress Tracking** - Visual progress bar and auto-save functionality
 - **Interactive Dashboard** - Comprehensive analytics with interactive charts
+- **Protected Routes** - Survey pages require authentication
 - **Mobile Responsive** - Fully optimized for all devices
 - **Offline Capable** - Uses localStorage for data persistence
 

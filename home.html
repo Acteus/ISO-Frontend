@@ -29,6 +29,7 @@
                     <a href="home.html" class="nav-link active">Home</a>
                     <a href="survey.html" class="nav-link">Survey</a>
                     <a href="dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="#" onclick="logout()" class="nav-link" style="color: #fde047;">Logout</a>
                 </nav>
             </div>
             
@@ -37,6 +38,7 @@
                 <a href="home.html" class="mobile-nav-link active">Home</a>
                 <a href="survey.html" class="mobile-nav-link">Survey</a>
                 <a href="dashboard.html" class="mobile-nav-link">Dashboard</a>
+                <a href="#" onclick="logout()" class="mobile-nav-link" style="color: #fde047;">Logout</a>
             </nav>
         </div>
     </header>
@@ -156,6 +158,30 @@
     </footer>
 
     <script src="main.js"></script>
+    <script>
+        // Check authentication on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = loadFromLocalStorage('currentUser');
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Display welcome message with user's name
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            if (heroSubtitle && currentUser.firstname) {
+                heroSubtitle.textContent = `Welcome, ${currentUser.firstname}!`;
+            }
+        });
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                removeFromLocalStorage('currentUser');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
 </body>
 </html>
 

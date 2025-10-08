@@ -29,6 +29,7 @@
                     <a href="home.html" class="nav-link">Home</a>
                     <a href="survey.html" class="nav-link">Survey</a>
                     <a href="dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="#" onclick="logout()" class="nav-link" style="color: #fde047;">Logout</a>
                 </nav>
             </div>
             
@@ -37,6 +38,7 @@
                 <a href="home.html" class="mobile-nav-link">Home</a>
                 <a href="survey.html" class="mobile-nav-link">Survey</a>
                 <a href="dashboard.html" class="mobile-nav-link">Dashboard</a>
+                <a href="#" onclick="logout()" class="mobile-nav-link" style="color: #fde047;">Logout</a>
             </nav>
         </div>
     </header>
@@ -98,5 +100,14 @@
     </footer>
 
     <script src="main.js"></script>
+    <script>
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                removeFromLocalStorage('currentUser');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
 </body>
 </html>

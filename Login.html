@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - JRU ISO Survey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(66,133,244,0.45), rgba(255,215,0,0.35)),
+        url('JoseRizalUniversityy.jpg') no-repeat center center/cover;
+      padding: 1rem;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 2.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.2);
+      max-width: 420px;
+      width: 100%;
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      animation: pageEnter 0.8s ease forwards;
+    }
+
+    @keyframes pageEnter {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.875rem;
+      color: #312e81;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #6b7280;
+      font-size: 0.875rem;
+      margin-bottom: 2rem;
+    }
+
+    .success-message {
+      background: #d1fae5;
+      color: #065f46;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+      display: none;
+    }
+
+    .form-content {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      color: #374151;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+      margin-top: 1rem;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #4338ca;
+      box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.1);
+    }
+
+    .error {
+      color: #dc2626;
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+      display: none;
+    }
+
+    .btn, .continue-btn {
+      width: 100%;
+      padding: 0.875rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: 'Montserrat', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+      background: linear-gradient(135deg, #4338ca, #312e81);
+      color: white;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+    }
+
+    .btn:hover, .continue-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(67, 56, 202, 0.4);
+    }
+
+    .btn:disabled, .continue-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .register-link {
+      text-align: center;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .register-link p {
+      color: #6b7280;
+      font-size: 0.875rem;
+    }
+
+    .register-link a {
+      color: #4338ca;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .register-link a:hover {
+      color: #312e81;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 2rem 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome Back</h2>
+    <p class="subtitle">Login to access the ISO Quality Education Survey</p>
+
+    <div class="success-message" id="successMessage"></div>
+
+    <div class="form-content">
+      <form id="loginForm">
+        <label>Student ID</label>
+        <input type="text" name="studentid" id="studentid" required placeholder="Enter your student ID">
+        <div class="error" id="studentidError">This is required</div>
+
+        <label>Last Name</label>
+        <input type="text" name="lastname" id="lastname" required placeholder="Enter your last name">
+        <div class="error" id="lastnameError">This is required</div>
+
+        <button type="submit" class="continue-btn" id="loginBtn">Login</button>
+      </form>
+    </div>
+
+    <div class="register-link">
+      <p>Don't have an account? <a href="register.html">Register here</a></p>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    // Check if user is already logged in
+    document.addEventListener('DOMContentLoaded', function() {
+      const currentUser = loadFromLocalStorage('currentUser');
+      if (currentUser) {
+        window.location.href = 'home.html';
+        return;
+      }
+
+      // Check for registration success message
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('registered') === 'true') {
+        const successMsg = document.getElementById('successMessage');
+        successMsg.textContent = 'Registration successful! Please login with your credentials.';
+        successMsg.style.display = 'block';
+      }
+    });
+
+    // Handle login form submission
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const studentId = document.getElementById('studentid').value.trim();
+      const lastName = document.getElementById('lastname').value.trim();
+      const loginBtn = document.getElementById('loginBtn');
+
+      // Clear previous errors
+      document.querySelectorAll('.error').forEach(el => el.style.display = 'none');
+
+      // Validate inputs
+      if (!studentId) {
+        showError('studentidError', 'Student ID is required');
+        return;
+      }
+
+      if (!lastName) {
+        showError('lastnameError', 'Last name is required');
+        return;
+      }
+
+      // Get registered users
+      const users = loadFromLocalStorage('registeredUsers') || [];
+      
+      // Find matching user
+      const user = users.find(u => 
+        u.studentid.toLowerCase() === studentId.toLowerCase() && 
+        u.lastname.toLowerCase() === lastName.toLowerCase()
+      );
+
+      if (user) {
+        // Login successful
+        loginBtn.textContent = 'Logging in...';
+        loginBtn.disabled = true;
+
+        // Save current user session
+        saveToLocalStorage('currentUser', {
+          studentid: user.studentid,
+          firstname: user.firstname,
+          lastname: user.lastname,
+          year: user.year,
+          section: user.section,
+          loginTime: new Date().toISOString()
+        });
+
+        // Redirect to home
+        setTimeout(() => {
+          window.location.href = 'home.html';
+        }, 500);
+      } else {
+        showError('lastnameError', 'Invalid Student ID or Last Name. Please register first.');
+      }
+    });
+
+    function showError(elementId, message) {
+      const errorElement = document.getElementById(elementId);
+      errorElement.textContent = message;
+      errorElement.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
