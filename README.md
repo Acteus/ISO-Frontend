@@ -33,6 +33,11 @@ git push -u origin main
 
 The site will be automatically deployed when you push changes to the main branch.
 
+**Note:** If you encounter permissions errors, ensure that:
+- GitHub Pages is enabled in your repository settings
+- The repository is public (required for free GitHub Pages)
+- GitHub Actions are enabled in repository settings
+
 ### 4. Access Your Site
 
 Once deployed, your site will be available at:
@@ -73,6 +78,25 @@ Once deployed, your site will be available at:
 ## Development
 
 To run locally, simply open `index.html` in a web browser. No build process required as this is a static site.
+
+## Troubleshooting
+
+### Common GitHub Pages Issues
+
+**Permission Denied Errors:**
+- Ensure GitHub Pages is enabled in Settings → Pages
+- Make sure the repository is public
+- Check that GitHub Actions are enabled in Settings → Actions
+
+**Build Failures:**
+- Verify all files are committed to the repository
+- Check that the workflow file is properly formatted
+- Ensure the `.nojekyll` file is present
+
+**Site Not Loading:**
+- Wait a few minutes after deployment completes
+- Check the repository's Pages settings for the correct URL
+- Verify that `index.html` is in the root directory
 
 ## Support
 

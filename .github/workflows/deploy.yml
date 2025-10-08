@@ -20,14 +20,27 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
+
+      - name: Create .nojekyll file
+        run: touch .nojekyll
+
+      - name: List files for debugging
+        run: |
+          echo "Root directory contents:"
+          ls -la
+          echo "Checking for index.html:"
+          ls -la index.html || echo "index.html not found!"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: './'
+          retention-days: 1
 
   deploy:
     environment:
@@ -39,3 +52,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Output deployment URL
+        run: |
+          echo "Site deployed to: ${{ steps.deployment.outputs.page_url }}"
